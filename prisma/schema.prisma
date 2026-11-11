@@ -1,0 +1,21 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Visitante {
+  id          Int      @id @default(autoincrement())
+  ticket      String   @unique
+  name        String
+  institution String
+  role        String?
+  reason      String
+  createdAt   DateTime @default(now()) @db.Timestamptz(3)
+
+  @@index([createdAt])
+  @@map("visitantes")
+}
